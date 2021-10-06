@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 
 import { ThemeProvider, createTheme, makeStyles } from '@material-ui/core/styles'
 import Home from './Home'
@@ -10,13 +10,21 @@ const useStyles = makeStyles({
 })
 
 function App() {
+  const [ darkMode, setDarkMode ] = useState(false)
+
   const theme = createTheme({
     palette: {
+      type: darkMode ? 'dark' : 'light',
       primary: {
         main: '#f44336'
       },
       secondary:{
-        main: '#3f51b5'
+        main: '#3EA6FF'
+      },
+      background:{
+        default: darkMode ? '#232323' : '#fff',
+        dark: darkMode ? '#181818' : '#f4f6f8',
+        paper:  darkMode ? '#232323' : '#fff',
       }
     },
   });
@@ -24,7 +32,7 @@ function App() {
   const classes = useStyles()
   return (
     <ThemeProvider theme={theme}>
-        <Home/>
+        <Home darkMode={darkMode} setDarkMode={setDarkMode}/>
     </ThemeProvider>
   );
 }
